@@ -2,9 +2,12 @@ var express		= require('express'),
 	app			= express(),
 	bodyParser	= require('body-parser'),
 	morgan		= require('morgan'),
-	//mysql		= require('mysql'),
+	mysql		= require('mysql'),
 	path		= require('path'),
 	serverPort	= process.env.PORT || 8080;
+	
+var config		= require('./config'),
+	mySql 		= require('./comet-node/models/mySql-pooled')(config.db);
 	
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,7 +19,7 @@ app.use(function (req,res,next) {
 	next();
 });
 
-//mySql.init();
+mySql.init();
 
 //var apiRoutes  = require('./server/routes/api')(app, express, mySql);
 //app.use('/api', apiRoutes);
