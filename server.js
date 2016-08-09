@@ -23,12 +23,12 @@ app.use(express.static(__dirname + "/public"));
 
 mySql.init();
 
-//var apiRoutes  = require('./server/routes/api')(app, express, mySql);
-//app.use('/api', apiRoutes);
+var mainRoutes  = require('./server/routes')(app, express, mySql);
+app.use('/', mainRoutes);
 
-app.get('*', function (req, res) {
+/*app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname + '/views/index.html'));
-});
+});*/
 
 app.on('error', function (err) {
 	console.log( '\x1b[31mAn error occured:\x1b[00m' + err );

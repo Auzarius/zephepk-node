@@ -1,5 +1,5 @@
 @html.extend('template', function(main) {
-		
+	@html.block("body", function(data) {
 		<section class="members">
 			<h1>Members</h1>
 			<div class="member logan">
@@ -92,5 +92,5 @@
 	True Metal Lives - Interview</a>
 	
 		</section>
-
+	})
 })

@@ -1,0 +1,203 @@
+* {
+  box-sizing : border-box;
+  margin     : 0;
+  padding    : 0;
+}
+
+/*
+  ****************
+  General page styles
+  *****************
+*/
+
+body {
+  max-width   : 500px;
+  margin      : 0 auto;
+  padding     : 0;
+  color       : #333;
+  background  : #eee;
+  text-align  : center;
+  font-family : 'Oswald',
+                sans-serif;
+  font-weight : 300;
+  font-size: 1.2em;
+}
+
+
+
+.line {
+  width         : 70%;
+  height        : 1px;
+  margin        : 25px auto;
+  border-bottom : 1px solid #888;
+  background    : #eee;
+}
+
+h1 {
+  margin         : 50px 0 40px;
+  text-transform : uppercase;
+  font-size: 2em;
+}
+
+h2,
+h3,
+h4 {
+  margin : 25px;
+}
+
+li {
+  list-style : none;
+}
+
+a {
+  text-decoration: none;
+  color       : #333;
+  font-weight: 400;
+}
+
+p {
+  font-weight:300;
+}
+
+/*
+  ****************
+  Header styles
+  *****************
+*/
+
+header {
+  width  : 100%;
+  margin : 10px auto 50px;
+}
+
+header img,
+header video {
+  max-width : 100%;
+}
+
+/*
+  ****************
+  Members
+  *****************
+*/
+
+.members {
+  margin: 40px 0;
+  max-width: 100%;
+}
+
+.members .member {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.members .label {
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.members .label h3,
+.members .label h4 {
+  display: inline-block;
+  margin: 0 0 0 4px;
+  color: #eee;
+}
+
+.members .label h3 {
+  font-size: 3em;
+}
+.members .label h4 {
+  font-size: 1.5em;
+}
+
+.members img {
+  max-width : 100%;
+}
+
+/*
+  ****************
+  Discography
+  *****************
+*/
+
+.discography img {
+  max-width : 400px;
+}
+
+/*
+  ****************
+  Shows
+  *****************
+*/
+
+.shows {
+  min-height : 300px;
+}
+
+/*
+  ****************
+  Contact
+  *****************
+*/
+
+.contact li {
+  margin : 30px 0;
+}
+
+/*
+  ****************
+  Reviews
+  *****************
+*/
+.reviews a {
+  margin: 30px 0;
+  display: block;
+}
+/*
+  ****************
+  Social Icons
+  *****************
+*/
+.social-icons {
+
+}
+
+.social-icons li {
+  display: inline-block;
+}
+
+.social-icons img  {
+  margin: 10px 20px;
+  width: 30px;
+  height: 30px;
+  -webkit-filter: grayscale(100%);
+}
+
+.social-icons img:hover {
+  -webkit-filter: grayscale(0);
+}
+
+img {
+
+}
+/*
+  ****************
+  Footer
+  *****************
+*/
+
+footer {
+  margin: 30px;
+  font-size: .8em;
+}
+
+footer li {
+  margin: 20px;
+}
+
+footer a {
+  font-weight: 300;
+}
