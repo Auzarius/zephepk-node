@@ -1,23 +1,25 @@
 var express		= require('express'),
 	app			= express(),
 	bodyParser	= require('body-parser'),
-	morgan		= require('morgan'),
-	mysql		= require('mysql'),
+//	morgan		= require('morgan'),
 	path		= require('path'),
 	serverPort	= process.env.PORT || 8080;
 	
 var config		= require('./config'),
-	mySql 		= require('./comet-node/models/mySql-pooled')(config.db);
-	
+	mySql 		= require('./server/models/mySql-pooled')(config.db);
+
+app.set("view engine", "vash");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function (req,res,next) {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, \
-	              Authorization');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
 	next();
 });
+
+app.use(express.static(__dirname + "/public"));
 
 mySql.init();
 
@@ -25,13 +27,13 @@ mySql.init();
 //app.use('/api', apiRoutes);
 
 app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname + '/public/views/index.html'));
+	res.sendFile(path.join(__dirname + '/views/index.html'));
 });
 
 app.on('error', function (err) {
-	console.log(config.c.red + 'An error occured:' + config.c.reset + err );
+	console.log( '\x1b[31mAn error occured:\x1b[00m' + err );
 });
 
 
 app.listen(serverPort);
-console.log( config.c.green + 'The Zeph EPK server is listening on port: ' + serverPort + "\x1b[31m!\x1b[0m");
+console.log( '\x1b[32mThe Zeph EPK server is listening on port: ' + serverPort + "\x1b[31m!\x1b[0m");

@@ -14,9 +14,12 @@
     "express": "^4.14.0",
     "graceful-fs": "^4.1.5",
     "lodash": "^4.14.1",
-    "mysql": "^2.11.1"
+    "mysql": "^2.11.1",
+    "vash": "^0.12.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "morgan": "^1.7.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Auzarius/zephepk-node.git"
