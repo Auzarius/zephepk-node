@@ -1,5 +1,5 @@
-@html.extend('template', function(main) {
-	@html.block("body", function(data) {
+@html.extend('template', function () {
+	@html.block("body", function () {
 		<section class="members">
 			<h1>Members</h1>
 			<div class="member logan">
@@ -52,10 +52,42 @@
 		
 		<section class="shows">
 			<h1>Upcoming Shows</h1>
-<?php
-	include 'loadTourDates.php';
-?>
-	
+		@if (model.shows) {
+			<table>
+			<tr>
+				<th>Show Date</th>
+				<th>City</th>
+				<th>State</th>
+				<th>Venue</th>
+				<th>Bands</th>
+				<th>Attendance</th>
+			</tr>
+			
+			@model.shows.forEach(function (show) {
+				var bands = show.Bands.replace(/\|/g, ", ");
+				var date  = new Date();
+				var sdate = new Date(show.ShowDate);
+				var dateClass;
+				
+				@if (sdate < date) {
+					dateClass = 'past';
+				} else {
+					dateClass = 'future';
+				}
+			
+			<tr class="@dateClass">
+				<td>@show.ShowDate</td>
+				<td>@show.City</td>
+				<td>@show.State</td>
+				<td>@show.Venue</td>
+				<td>@bands</td>
+				<td>@show.Attendance</td>
+			</tr>
+			})
+			
+			</table>
+		}
+		
 		</section>
 		
 		<div class="line"></div>

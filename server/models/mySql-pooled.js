@@ -35,7 +35,7 @@ module.exports = function(config) {
 			
 			if ( err.message === 'listen EADDRINUSE' ) {
 				console.log("\x1b[33mIt is highly likely that the port you have chosen:\x1b[00m " +
-				        + process.env.PORT + "\x1b[33m is already in use. \r\n" + 
+				        process.env.PORT + "\x1b[33m is already in use. \r\n" + 
 				        "\x1b[00mPlease select a different port!");
 			}
 			else if ( err.message === 'connect ECONNREFUSED' ) {
@@ -44,7 +44,7 @@ module.exports = function(config) {
 				console.error('[PROC] \x1b[31mDetails:\x1b[00m ' + err.stack);
 			}
 		});
-	}
+	};
 	
 	mySql.handleError = function (err) {
 		var vm = this;
@@ -73,12 +73,12 @@ module.exports = function(config) {
 				console.error('[mySql]' + err.message);
 			}
 		}
-	}
+	};
 	
 	mySql.verifyResult = function(result) {
 		return ( result !== null && result !== undefined);
 		// && /[A-Za-z0-9]+/.test(result) 
-	}
+	};
 	
 	mySql.query = function(query, vars, next) {	
 		if ( query ) {
@@ -103,7 +103,39 @@ module.exports = function(config) {
 			throw new Error('A query must be passed as the first parameter for this function\n' +
 			                '@params query (string), vars [optional] (array), callback (function)');
 		}
-	}
+	};
+	
+	mySql.getAlbumData = function(album) {
+		var query = 'SELECT t.TrackNum, t.Name, t.Length, t.Lyrics ' +
+					'FROM AlbumTracks t ' +
+					'LEFT JOIN Albums a ' +
+					'ON t.Albumid = a.Id ' +
+					'WHERE a.Name = \'' + album + '\'';
+		mySql.query(query, function(err, result) {
+			if (err) {
+				throw new Error(err);
+			} else if (mySql.verifyResult(result[0])) {
+				return result[0];
+			} else {
+				return false;
+			}
+		});
+	};
+	
+	mySql.getTourData = function(next) {
+		var query = 'SELECT ShowDate, City, State, Venue, ' +
+					'Bands, Attendance ' +
+					'FROM TourDates ' +
+					'ORDER BY ShowDate DESC';
+					
+		mySql.query(query, function(err, result) {
+			if (err) {
+				throw new Error(err);
+			} else {
+				next(null, result);
+			}
+		});
+	};
 
 	return mySql;
 }

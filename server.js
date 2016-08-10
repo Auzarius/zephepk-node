@@ -3,7 +3,8 @@ var express		= require('express'),
 	bodyParser	= require('body-parser'),
 //	morgan		= require('morgan'),
 	path		= require('path'),
-	serverPort	= process.env.PORT || 8080;
+	serverPort	= process.env.PORT || 8080,
+	vash		= require('vash');
 	
 var config		= require('./config'),
 	mySql 		= require('./server/models/mySql-pooled')(config.db);
