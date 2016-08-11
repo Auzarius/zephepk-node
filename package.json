@@ -19,7 +19,8 @@
     "vash": "^0.12.1"
   },
   "devDependencies": {
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "nodemon": "^1.10.0"
   },
   "repository": {
     "type": "git",
