@@ -3,8 +3,7 @@ var express		= require('express'),
 	bodyParser	= require('body-parser'),
 //	morgan		= require('morgan'),
 	path		= require('path'),
-	serverPort	= process.env.PORT || 8080,
-	vash		= require('vash');
+	serverPort	= process.env.PORT || 8080;
 	
 var config		= require('./config'),
 	mySql 		= require('./server/models/mySql-pooled')(config.db);
@@ -25,7 +24,12 @@ app.use(express.static(__dirname + "/public"));
 mySql.init();
 
 var mainRoutes  = require('./server/routes')(app, express, mySql);
+var apiRoutes	= require('./server/routes/api')(app, express, mySql);
 app.use('/', mainRoutes);
+app.use('/api', apiRoutes);
+app.get('/admin', function(req, res) {
+	res.sendFile(path.join(__dirname + '/views/admin/index.html'));
+});
 
 /*app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname + '/views/index.html'));

@@ -2,5 +2,6 @@
 <!-- Komodo Project File - DO NOT EDIT -->
 <project id="bdb899f5-be76-48a9-a9f1-e551a2d0bf15" kpf_version="5" name="ZephEPKNode.komodoproject">
 <preference-set idref="bdb899f5-be76-48a9-a9f1-e551a2d0bf15" id="project" preftype="project">
+  <long id="prefs_version">1</long>
 </preference-set>
 </project>

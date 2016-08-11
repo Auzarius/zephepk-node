@@ -6,5 +6,6 @@ module.exports = {
 		password 		: '',
 		database 		: 'zeph',
 		port 			: '3306',
+		users_table		: 'users'
 	},
 };
