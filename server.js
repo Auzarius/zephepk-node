@@ -27,8 +27,8 @@ var mainRoutes  = require('./server/routes')(app, express, mySql);
 var apiRoutes	= require('./server/routes/api')(app, express, mySql);
 app.use('/', mainRoutes);
 app.use('/api', apiRoutes);
-app.get('/admin', function(req, res) {
-	res.sendFile(path.join(__dirname + '/views/admin/index.html'));
+app.get('*', function(req, res) {
+	res.sendFile(path.join(__dirname + '/public/views/index.html'));
 });
 
 /*app.get('*', function (req, res) {
