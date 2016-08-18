@@ -5,7 +5,8 @@ var	jwt		= require('jsonwebtoken'),
 	secret  = config.secret;
 
 module.exports = function (app, express, mySql) {
-	var apiRouter 	= express.Router();
+	var apiRouter 	= express.Router(),
+		apiDB		= require('./db')(app, express, mySql);
 		//apiUsers   	= require('./users')(app, express, mySql),
 	
 	// test route to make sure everything is working
@@ -164,6 +165,8 @@ module.exports = function (app, express, mySql) {
 	apiRouter.get('/me', function (req, res) {
 		res.json(req.decoded);
 	});
+	
+	apiRouter.use('/db', apiDB);
 	
 	//apiRouter.use('/users', apiUsers);
 	

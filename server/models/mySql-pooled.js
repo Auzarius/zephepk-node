@@ -68,11 +68,15 @@ module.exports = function(config) {
 			
 			else if ( /ECONNREFUSED/.test(err.code) ) {
 				console.error('[mySql] Your MYSQL connection was refused, please make sure the server is active.');
+				return err.message;
 			}
 			
 			else {
 				console.error('[mySql]' + err.message);
+				return err.message;
 			}
+		} else {
+			return false;
 		}
 	};
 	
@@ -84,8 +88,12 @@ module.exports = function(config) {
 	mySql.query = function(query, vars, next) {	
 		if ( query ) {
 			Connection.getConnection(function (err, connection) {
-				if (!connection || err) {
+				if (!connection) {
+					console.error('A connection could not be opened.');
 					mySql.handleError(err);
+				} else if (err) {
+					connection.release();
+					mySql.handleError(err);	
 				} else {
 					if ( vars === null ) {
 						connection.query(query, function (err, result) {
@@ -101,6 +109,7 @@ module.exports = function(config) {
 				}
 			});
 		} else {
+			connection.release();
 			throw new Error('A query must be passed as the first parameter for this function\n' +
 			                '@params query (string), vars [optional] (array), callback (function)');
 		}
@@ -111,7 +120,7 @@ module.exports = function(config) {
 					'FROM AlbumTracks t ' +
 					'LEFT JOIN Albums a ' +
 					'ON t.Albumid = a.Id ' +
-					'WHERE a.Name = \'' + album + '\'';
+					'WHERE a.Name = \'' + Connection.escape(album) + '\'';
 		mySql.query(query, function(err, result) {
 			if (err) {
 				throw new Error(err);
@@ -420,12 +429,63 @@ module.exports = function(config) {
 				} else {
 					throw new Error('You must fill out all of the fields.\n' +
 					                    'Required fields: Firstname, Lastname, Username, Password and Email');
-					return false;
+					//return false;
 				}
 			} else {
 				throw new Error('You must define the method: create / save');
-				return false;
+				//return false;
 			}
+		}
+	};
+	
+	mySql.db = {
+		list : function (next) {
+			var query = 'SELECT TABLE_NAME as tableName, TABLE_ROWS as tableRows, ' +
+						'DATA_LENGTH as tableLength ' +
+						'FROM INFORMATION_SCHEMA.tables ' +
+						'WHERE TABLE_TYPE = "BASE TABLE" AND TABLE_SCHEMA = "zeph";';
+			
+			mySql.query(query, null, function (err, result) {
+				if (err) {
+					next(mySql.handleError(err), null);
+				} else {
+					next(null, {
+						success : true,
+						message : 'The table list was successfully retrieved.',
+						data	: result
+					});
+				}
+			});
+		},
+		
+		table : function(table, next) {
+			console.log('"' + table + '"');
+			console.log('"' + Connection.escape(table) + '"');
+			var query1 = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME=' + Connection.escape(table);
+			var query2 = 'SELECT * FROM ' + table;
+			
+			mySql.query(query1, table, function (err, result1) {
+				if (err) {
+					next(mySql.handleError(err), null);
+				} else {
+					mySql.query(query2, table, function (err, result2) {
+						if (err) {
+							next(mySql.handleError(err), null);
+						} else {							
+							next(null, {
+								success	: true,
+								message	: 'The table data was successfully retrieved.',
+								data	: {
+									table	: table,
+									columns	: result1,
+									rows	: result2
+								} 
+							});
+						}
+					});
+					
+				}
+			});
 		}
 	};
 	
