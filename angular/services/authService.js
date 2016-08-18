@@ -65,9 +65,8 @@ angular.module('authService', [])
 	var authTokenFactory = {};
 
 	// get the token out of local storage
-	// renamed the token to metal for this particular project
 	authTokenFactory.getToken = function() {
-		return $window.localStorage.getItem('metal');
+		return $window.localStorage.getItem('token');
 	};
 
 	// function to set token or clear token
@@ -75,9 +74,9 @@ angular.module('authService', [])
 	// if there is no token, clear it from local storage
 	authTokenFactory.setToken = function(token) {
 		if (token)
-			$window.localStorage.setItem('metal', token);
+			$window.localStorage.setItem('token', token);
 	 	else
-			$window.localStorage.removeItem('metal');
+			$window.localStorage.removeItem('token');
 	};
 
 	return authTokenFactory;
@@ -110,7 +109,7 @@ angular.module('authService', [])
 		// if our server returns a 403 forbidden response
 		if (response.status == 401) {
 			AuthToken.setToken();
-			$location.path('/signin');
+			$location.path('/admin/login');
 		} else if (response.status == 403) {
 			$location.path('/forbidden');
 		}

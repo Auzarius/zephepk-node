@@ -4,7 +4,7 @@
 
 body {
 	background: white;
-	background: repeating-linear-gradient(45deg, #F8F8F8, #F8F8F8 10px, #FDFDFD 10px, #FDFDFD 20px);
+	//background: repeating-linear-gradient(45deg, #F8F8F8, #F8F8F8 10px, #FDFDFD 10px, #FDFDFD 20px);
 }
 
 h1:after {
@@ -397,6 +397,10 @@ div[ng-view].ng-enter {
 
 .gi-5x {
 	font-size: 5em;
+}
+
+.navbar-inverse {
+	background-color: #777;
 }
 
 /*!

@@ -5,19 +5,21 @@
 	<title>Zeph EPK Node | Admin</title>
 
 	<!-- FOR ANGULAR ROUTING -->
-	<base href="/admin">
+	<base href="/">
     <meta name="viewport" content="width=device-width">
 	<!-- CSS  -->
 	<link rel="stylesheet" href="lib/css/bootswatch.paper.min.css" />
+	<!--<link rel="stylesheet" href="lib/css/xeditable.min.css" />-->
 	<link rel="stylesheet" href="css/main.css" />
 
 	<!-- JS -->
 	<script src="lib/js/angular.min.js"></script>
 	<script src="lib/js/angular-route.min.js"></script>
 	<script src="lib/js/angular-animate.min.js"></script>
-	<script src="ng/zeph.epk.min.js"></script>
+	<script src="ng/zeph.epk.js"></script>
 	<script src="lib/js/moment.min.js"></script>
 	<script src="lib/js/angular-moment.min.js"></script>
+	<!--<script src="lib/js/xeditable.min.js"></script>-->
 </head>
 <body ng-app="epk" ng-controller="mainController as main">
 	<header>
@@ -36,7 +38,7 @@
 					</a>
 				</div>	
 				<ul class='nav navbar-nav navbar-left collapse navbar-collapse'>
-					<li><a href="/admin/tickets"><span class="glyphicon glyphicon-edit"></span> Tickets</a></li>
+					<li><a href="/admin/whoa-bro"><span class="glyphicon glyphicon-blackboard"></span> Database</a></li>
 					<li><a href="/admin/users"><span class="glyphicon glyphicon-user"></span> Users</a></li>
 					
 				</ul>
@@ -49,7 +51,7 @@
 						</a>
 						<ul class="dropdown-menu pull-right">
 							<li>
-								<a href="/admin/profile" ng-href="/profile">
+								<a href="/admin/profile" ng-href="/admin/profile">
 									<i class="glyphicon glyphicon-cog"></i> Profile
 								</a>
 							</li>
@@ -73,7 +75,7 @@
 			</a>
 			<ul class="dropdown-menu pull-right">
 				<li>
-					<a href="/profile" ng-href="/profile">
+					<a href="/admin/profile" ng-href="/admin/profile">
 						<i class="glyphicon glyphicon-cog"></i> Profile
 					</a>
 				</li>

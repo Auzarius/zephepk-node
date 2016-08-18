@@ -17,6 +17,34 @@ module.exports = function (app, express, mySql) {
 		});
 	});
 	
+	apiRouter.get('/passgen', function(req, res) {
+		res.json({
+			message: 'Please pass a password you would like to have hashed to: /api/passgen/:password where :password is your password.'
+		});
+	})
+	
+	apiRouter.route('/passgen/:password')
+		.get(function (req, res) {
+			console.log("Password: " + req.params.password);
+			
+			if (req.params.password) {
+				mySql.bcrypt.hash(req.params.password, 10, function(err, hash) {
+					if (err) {
+						throw new Error(err);
+					} else {
+						res.json({
+							hashed_password: hash
+						});
+					}					
+				});
+			} else {
+				res.json({
+					message: 'Something went wrong when trying to hash your password.'
+				});
+			}
+			
+		});
+	
 	//authentication route
 	apiRouter.route('/authenticate')
 		.get(function (req, res) {
@@ -64,7 +92,7 @@ module.exports = function (app, express, mySql) {
 			                    		//role   		: user.data.role
 			                    	},
 			                    	secret, {
-			                    		expiresInMinutes: 1700
+			                    		expiresIn: "1 day"
 			                    	}
 			                    );
 			                    
@@ -89,30 +117,6 @@ module.exports = function (app, express, mySql) {
 				});
 			}
 		});
-
-	apiRouter.get('/plunker/awesomplete', function (req, res) {
-		res.status(200).json({
-			data: [
-		        {
-		          name: "Ada"
-		        }, {
-		          name: "Javascript"
-		        }, {
-		          name: "Ruby on Rails"
-		        }, {
-		          name: "Perl"
-		        }, {
-		          name: "Java"
-		        }, {
-		          name: "HTML"
-		        }, {
-		          name: "CSS"
-		        }, {
-		          name: "AAJSONNameList"
-		        }],
-        	datalist: ["Ada", "Java", "JavaScript", "Brainfuck", "LOLCODE", "Node.js", "Ruby on Rails", "AAJSONArrayList"]
-		});
-	});
 
 	apiRouter.use(function (req, res, next) {
 		// do logging

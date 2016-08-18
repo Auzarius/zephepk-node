@@ -6,37 +6,41 @@ angular.module('app.routes', ['ngRoute'])
 			})
 			
 			.when('/admin/login', {
-				templateUrl : './views/login.html',
+				templateUrl : './views/users/login.html',
 				controller  : 'mainController',
 				controllerAs: 'login'
 			})
 			
 			.when('/admin/users', {
 				templateUrl : './views/users/all.html',
-				controller  : 'userController',
-				controllerAs: 'user'
+				controller  : 'mainController',
+				controllerAs: 'main'
+				//controller  : 'userController',
+				//controllerAs: 'user'
 			})
 			
 			.when('/admin/users/new', {
 				templateUrl : './views/users/create.html',
-				controller  : 'userCreateController',
-				controllerAs: 'user'
+				controller  : 'mainController',
+				controllerAs: 'main'
+				//controller  : 'userCreateController',
+				//controllerAs: 'user'
 			})
 			
 			.when('/admin/users/:userId', {
 				templateUrl : './views/users/edit.html',
-				controller  : 'userEditController',
-				controllerAs: 'user'
+				controller  : 'mainController',
+				controllerAs: 'main'
+				//controller  : 'userEditController',
+				//controllerAs: 'user'
 			})
 			
 			.when('/admin/profile', {
 				templateUrl : './views/users/profile.html',
-				controller  : 'userProfileController',
-				controllerAs: 'user'
-			})
-			
-			.when('/admin/db', {
-				
+				controller  : 'mainController',
+				controllerAs: 'main'
+				//controller  : 'userProfileController',
+				//controllerAs: 'user'
 			})
 			
 			.when('/admin/whoa-bro', {
