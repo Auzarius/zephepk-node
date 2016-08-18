@@ -16,3 +16,4 @@ To-do:
 4. Run `npm i` at the root of the project folder to install the node dependencies from NPM.  For now I have decided to use bcrypt since it has been extensively tested and has decent speed.  If you run into any issues with that module going into error after running `npm i` please try following [this guide I put together](https://gist.github.com/Auzarius/b73dabe8f6a6d553775e451923469da4).  If you find something not listed in that guide helped you, please feel free to leave a comment on it so i can update it accordingly.
 5. Run `node server.js` to start the server.  This should display 'The Zeph EPK server is listening on port: <port>!'
 6. Navigate to the site in your browser at 127.0.0.1:<port>, by default 127.0.0.1:8080
+7. localhost/admin/login has a default username and password of admin
