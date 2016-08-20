@@ -93,7 +93,7 @@ module.exports = function (app, express, mySql) {
 			                    		//role   		: user.data.role
 			                    	},
 			                    	secret, {
-			                    		expiresIn: "1 day"
+			                    		expiresIn: "7d"
 			                    	}
 			                    );
 			                    

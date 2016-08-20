@@ -1,0 +1,60 @@
+<div class="show-hide-message fixed" ng-show="table.message">
+	<div class="row alert alert-info alert-dismissable">
+		<div class='col-xs-11'>{{ table.message }}</div>
+		<button type="button" class="close" ng-click="table.message = ''" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>
+
+<div class="page-header">
+	<h1 class="row">
+		<span class="font-gradient">
+			Table - {{ table.data.table }}
+		</span>
+	</h1>
+	<div class="row">
+		<a href="/admin/db" class="btn btn-default col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-3">
+			<span class="glyphicon glyphicon-chevron-left"></span> 
+			Back
+		</a>
+		<a href="#" class="btn btn-primary col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-3">
+			<span class="glyphicon glyphicon-floppy-disk"></span> 
+			Save Changes
+		</a> 
+		<a href="#" class="btn btn-danger col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-3">
+			<span class="glyphicon glyphicon-trash"></span> 
+			Delete Table
+		</a>
+	</div>
+</div>
+
+<div class="jumbotron text-center" ng-show="tables.processing && !tables.data">
+	<span class="glyphicon glyphicon-repeat spinner"></span>
+	<h3>Loading {{ table.data.table }} ...</h3>
+</div>
+
+<div class="jumbotron text-center" ng-show="!table.processing && ( table.data.length < 1 || !table.data )">
+	<p>There there is no data available at this time or a connection to the server could not be made.</p>
+</div>
+
+
+
+<table ng-cloak id="table" class="table table-bordered tbody-striped" ng-show="table.data">
+	<thead>
+		<tr>
+			<th width="3%"></th>
+			<th width="3%"></th>
+			<th ng-repeat="column in table.data.columns">
+				<span ng-repeat="(key, value) in column | orderBy: value">{{ value }}</span>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in table.data.rows">
+			<td width="3%"><span class="glyphicon glyphicon-cog"></span></td>
+			<td width="3%"><span class="glyphicon glyphicon-trash"></span></td>
+			<td ng-repeat="col in noSort(row)" editable-text="row[col]">{{ row[col] }}</td>
+		</tr>
+	</tbody>
+</table>

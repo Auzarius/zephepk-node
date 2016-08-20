@@ -459,9 +459,8 @@ module.exports = function(config) {
 		},
 		
 		table : function(table, next) {
-			console.log('"' + table + '"');
-			console.log('"' + Connection.escape(table) + '"');
-			var query1 = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.columns WHERE TABLE_NAME=' + Connection.escape(table);
+			var query1 = 'SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.columns ' +
+						 'WHERE TABLE_SCHEMA=' + Connection.escape(mySql.config.database) + ' AND TABLE_NAME=' + Connection.escape(table);
 			var query2 = 'SELECT * FROM ' + table;
 			
 			mySql.query(query1, table, function (err, result1) {

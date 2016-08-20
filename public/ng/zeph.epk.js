@@ -1,13 +1,18 @@
 angular.module('epk',
 			   [
+					'xeditable',
 					'app.routes',
 					'ngAnimate',
-					//'xeditable',
 					'authService',
-					'mainCtrl'
+					'mainCtrl',
+					'dbCtrl',
+					'dbService'
 			   ])
 		.config(["$httpProvider", function($httpProvider) {
 			$httpProvider.interceptors.push('AuthInterceptor');
+		}])
+		.run(["editableOptions", function(editableOptions) {
+			editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 		}]);
 		
 		
@@ -56,6 +61,18 @@ angular.module('app.routes', ['ngRoute'])
 				//controllerAs: 'user'
 			})
 			
+			.when('/admin/db', {
+				templateUrl	: './views/db/index.html',
+				controller 	: 'tablesController',
+				controllerAs: 'tables'
+			})
+			
+			.when('/admin/db/:table', {
+				templateUrl	: './views/db/table.html',
+				controller 	: 'tableController',
+				controllerAs: 'table'
+			})
+			
 			.when('/admin/whoa-bro', {
 				templateUrl : './views/403.html',
 				controller  : 'mainController',
@@ -69,7 +86,96 @@ angular.module('app.routes', ['ngRoute'])
 			$locationProvider.html5Mode(true);
 	}]);
 	
+angular.module('dbCtrl', ['dbService'])
 
+.controller('tablesController', ["$scope", "Database", function($scope, Database) {
+	
+	var vm = this;
+	vm.processing = true;
+	
+	Database.tables.get()
+		.success(function (apiResult) {
+			vm.data = apiResult.data;
+			vm.processing = false;
+		})
+		.error(function (apiResult) {
+			if (apiResult) {
+				vm.message = apiResult.message;
+			}
+			
+			vm.data = null;
+			vm.processing = false;
+		});
+						
+	vm.deleteTable = function(tableName) {
+		vm.processing = true;
+		
+		Database.table.delete(tableName)
+			.success(function (api) {
+				if (api.success) {
+					Database.tables.get()
+						.success(function (apiResult) {
+							vm.data = apiResult.data;
+						});
+				}
+				
+				vm.processing = false;
+				vm.message = api.message;
+			});
+	};
+	
+}])
+
+.controller('tableController', ["$scope", "$routeParams", "Database", function($scope, $routeParams, Database) {
+	
+	var vm = this;
+	vm.processing = true;
+	
+	$scope.noSort = function(obj){
+        if (!obj) {
+            return [];
+        }
+		
+		if (obj['$$hashKey']) {
+			delete obj['$$hashKey'];
+		}
+		
+		return Object.keys(obj);
+    };
+	
+	Database.table.get($routeParams.table)
+		.success(function (apiResult) {
+			vm.data = apiResult.data;
+			vm.processing = false;
+			console.log(apiResult.data);
+		})
+		.error(function (apiResult) {
+			if (apiResult) {
+				vm.message = apiResult.message;
+			}
+			
+			vm.data = null;
+			vm.processing = false;
+		});
+		
+	vm.deleteRow = function(tableRow) {
+		vm.processing = true;
+		
+		Database.row.delete(tableRow)
+			.success(function (api) {
+				if (api.success) {
+					Database.table.get()
+						.success(function (apiResult) {
+							vm.data = apiResult.data;
+						});
+				}
+
+				vm.processing = false;
+				vm.message = api.message;
+			});
+	};
+	
+}]);
 angular.module('mainCtrl', ['angularMoment'])
 
 .controller('mainController', ["$rootScope", "$location", "Auth", function($rootScope, $location, Auth) {
@@ -82,8 +188,8 @@ angular.module('mainCtrl', ['angularMoment'])
 	
 	// check to see if a user is logged in on every request
 	$rootScope.$on('$routeChangeStart', function(event) {
-		vm.loggedIn = Auth.isLoggedIn();	
-		console.log('route change');
+		vm.loggedIn = Auth.isLoggedIn();
+		
 		if (vm.loggedIn) {
 			vm.location = $location.path();
 			Auth.getUser()
@@ -107,7 +213,7 @@ angular.module('mainCtrl', ['angularMoment'])
 	// resets the view to the top of the page when a new route loads
 	// this prevents the view focus from staying the same from page to page
 	$rootScope.$on('$routeChangeSuccess',function() { 
-		$("html, body").animate({ scrollTop: 0 }, 200); 
+		$("html, body").animate({ scrollTop: 0 }, 100); 
 	});
 
 	// function to handle login form
@@ -264,5 +370,29 @@ angular.module('authService', [])
 
 	return interceptorFactory;
 	
+}]);
+angular.module('dbService', [])
+
+.factory('Database', ["$http", function($http) {
+	
+	var dbFactory = {};
+	
+	dbFactory.tables = {
+		get : function() {
+			return $http.get('/api/db');
+		}
+	};
+	
+	dbFactory.table = {
+		get : function(tableName) {
+			return $http.get('/api/db/' + tableName);
+		},
+		
+		delete : function(tableName) {
+			return $http.delete('/api/db' + tableName);
+		}
+	};
+	
+	return dbFactory;
 }]);
 

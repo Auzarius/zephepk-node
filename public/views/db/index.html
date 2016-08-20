@@ -1,0 +1,46 @@
+
+<div class="show-hide-message fixed" ng-show="tables.message">
+	<div class="row alert alert-info alert-dismissable">
+		<div class='col-xs-11'>{{ tables.message }}</div>
+		<button type="button" class="close" ng-click="tables.message = ''" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+	</div>
+</div>
+
+<div class="page-header">
+	<h1 class="row">
+		<span class="font-gradient">
+			All Tables
+		</span>
+	</h1>
+	<i ng-if="tables.data"><strong ng-if="tables.data.length > 0">{{ tables.data.length }}</strong><span ng-if="tables.data.length <= 0">No</span><span ng-if="tables.data.length != 1"> tables were found.</span><span ng-if="tables.data.length == 1"> table was found.</span></i>
+</div>
+
+<div class="jumbotron text-center" ng-show="tables.processing && !tables.data">
+	<span class="glyphicon glyphicon-repeat spinner"></span>
+	<h3>Loading Tables...</h3>
+</div>
+
+<div class="jumbotron text-center" ng-show="!tables.processing && ( tables.data.length < 1 || !tables.data )">
+	<p>There are no tables available at this time or a connection to the server could not be made.</p>
+</div>
+
+<table ng-cloak id="tables" class="table table-bordered tbody-striped" ng-show="tables.data && tables.data.length > 0">
+	<thead>
+		<tr>
+			<th></th>
+			<th>Name</th>
+			<th>Rows</th>
+			<th>Length</th>	
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="table in tables.data">
+			<td width="5%"><a class='btn btn-success' ng-href='/admin/db/{{ table.tableName }}'>View Table</a></td>
+			<td width="50%">{{ table.tableName }}</td>
+			<td>{{ table.tableRows }}</td>
+			<td>{{ table.tableLength }}</td>
+		</tr>
+	</tbody>
+</table>

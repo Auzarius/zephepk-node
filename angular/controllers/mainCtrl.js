@@ -10,8 +10,8 @@ angular.module('mainCtrl', ['angularMoment'])
 	
 	// check to see if a user is logged in on every request
 	$rootScope.$on('$routeChangeStart', function(event) {
-		vm.loggedIn = Auth.isLoggedIn();	
-		console.log('route change');
+		vm.loggedIn = Auth.isLoggedIn();
+		
 		if (vm.loggedIn) {
 			vm.location = $location.path();
 			Auth.getUser()
@@ -35,7 +35,7 @@ angular.module('mainCtrl', ['angularMoment'])
 	// resets the view to the top of the page when a new route loads
 	// this prevents the view focus from staying the same from page to page
 	$rootScope.$on('$routeChangeSuccess',function() { 
-		$("html, body").animate({ scrollTop: 0 }, 200); 
+		$("html, body").animate({ scrollTop: 0 }, 100); 
 	});
 
 	// function to handle login form

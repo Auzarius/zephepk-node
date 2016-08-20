@@ -43,6 +43,18 @@ angular.module('app.routes', ['ngRoute'])
 				//controllerAs: 'user'
 			})
 			
+			.when('/admin/db', {
+				templateUrl	: './views/db/index.html',
+				controller 	: 'tablesController',
+				controllerAs: 'tables'
+			})
+			
+			.when('/admin/db/:table', {
+				templateUrl	: './views/db/table.html',
+				controller 	: 'tableController',
+				controllerAs: 'table'
+			})
+			
 			.when('/admin/whoa-bro', {
 				templateUrl : './views/403.html',
 				controller  : 'mainController',
