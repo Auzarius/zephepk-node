@@ -143,6 +143,23 @@ angular.module('dbCtrl', ['dbService'])
 		return Object.keys(obj);
     };
 	
+	$scope.isNumber = angular.isNumber;
+	
+	$scope.isDate = function(val) {
+		var date = Date.parse(val);
+		
+		if(isNaN(date))
+			return false;
+		else if (val.toString().length < 10)
+			return false;
+		else
+		 	return true;
+	};
+
+	$scope.getType = function(myVar) {
+		return typeof myVar;
+	};
+	
 	Database.table.get($routeParams.table)
 		.success(function (apiResult) {
 			vm.data = apiResult.data;

@@ -52,9 +52,17 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="row in table.data.rows">
-			<td width="3%"><span class="glyphicon glyphicon-cog"></span></td>
-			<td width="3%"><span class="glyphicon glyphicon-trash"></span></td>
-			<td ng-repeat="col in noSort(row)" editable-text="row[col]">{{ row[col] }}</td>
+			<td width="1%"><span class="btn btn-danger glyphicon glyphicon-trash"></span></td>
+			<td width="1%"><span class="btn btn-success glyphicon glyphicon-cog"></span></td>
+			<td ng-repeat="col in noSort(row)">
+				<div class="popover-wrapper">
+					<a ng-if="row[col].length < 30 || isNumber(row[col])" href="#" editable-text="row[col]">
+						<span ng-if="!isDate(row[col])">{{ row[col] }}</span>
+						<span ng-if="isDate(row[col])">{{ row[col] | amDateFormat:'MM-DD-YYYY' }}</span>
+					</a>
+					<a ng-if="row[col].length >= 30" href="#" editable-textarea="row[col]" rowspan=10 colspan=10>{{ row[col] }}</a>
+				</div>
+			</td>
 		</tr>
 	</tbody>
 </table>
