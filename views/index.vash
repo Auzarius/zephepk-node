@@ -44,8 +44,66 @@
 		<section class="discography">
 			<h1>Discography</h1>
 			<h4>Tap to download</h4>
-			<a href="http://www.zephaniahband.com/assets/audio/Stories2008/Zephaniah-Stories_from_the_Book_of_Metal.zip"><img src="http://www.zephaniahband.com/images/design/stories.jpg" alt="Download Stories from the book of metal album"></a>
-			<a href="http://www.zephaniahband.com/assets/audio/Reforged2015/Zephaniah-Reforged.zip"><img src="http://www.zephaniahband.com/images/design/reforged.jpg" alt="Download Reforged album"></a>
+			
+			@if (model.album1) {
+				<div>
+					<a href="http://www.zephaniahband.com/assets/audio/Stories2008/Zephaniah-Stories_from_the_Book_of_Metal.zip"><img src="http://www.zephaniahband.com/images/design/stories.jpg" alt="Download Stories from the book of metal album"></a>
+					<table>
+						<tr>
+							<th>Track Number</th>
+							<th>Track Name</th>
+							<th>Length</th>
+							<th>Lyrics</th>
+						</tr>
+					@model.album1.forEach(function(track) {
+						var idName = track.Name.replace(/[' ','(',')','\'']/g, '');
+					
+						<tr id="tr-@idName">
+							<td>@track.TrackNum</td>
+							<td>@track.Name</td>
+							<td>@track.Length</td>
+							<td><a href="#tr-@idName" id="toggle@idName" class="lyricsToggle">Show Lyrics</a></td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div class="lyrics" style="white-space: pre-wrap;" id="@idName">@track.Lyrics</div>
+							</td>
+						</tr>
+					})
+					
+					</table>
+				</div>
+			}
+			
+			@if (model.album2) {
+				<div>
+					<a href="http://www.zephaniahband.com/assets/audio/Reforged2015/Zephaniah-Reforged.zip"><img src="http://www.zephaniahband.com/images/design/reforged.jpg" alt="Download Reforged album"></a>
+					<table>
+						<tr>
+							<th>Track Number</th>
+							<th>Track Name</th>
+							<th>Length</th>
+							<th>Lyrics</th>
+						</tr>
+					@model.album2.forEach(function(track) {
+						var idName = track.Name.replace(/[' ','(',')','\'']/g, '');
+					
+						<tr id="tr-@idName">
+							<td>@track.TrackNum</td>
+							<td>@track.Name</td>
+							<td>@track.Length</td>
+							<td><a href="#tr-@idName" id="toggle@idName" class="lyricsToggle">Show Lyrics</a></td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div class="lyrics" style="white-space: pre-wrap;" id="@idName">@track.Lyrics</div>
+							</td>
+						</tr>
+					})
+					
+					</table>
+				</div>
+			}			
 		</section>
 		
 		<div class="line"></div>
@@ -64,10 +122,11 @@
 			</tr>
 			
 			@model.shows.forEach(function (show) {
-				var bands = show.Bands.replace(/\|/g, ", ");
+				var bands = show.Bands.replace(/\|/g, '\r\n');
 				var date  = new Date();
 				var sdate = new Date(show.ShowDate);
 				var dateClass;
+				show.ShowDate = sdate.toString().substring(0,15);
 				
 				@if (sdate < date) {
 					dateClass = 'past';
@@ -80,7 +139,7 @@
 				<td>@show.City</td>
 				<td>@show.State</td>
 				<td>@show.Venue</td>
-				<td>@bands</td>
+				<td style="white-space: pre-line;">@bands</td>
 				<td>@show.Attendance</td>
 			</tr>
 			})

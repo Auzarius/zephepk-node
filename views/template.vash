@@ -4,58 +4,79 @@
 		<meta charset="utf-8">
 		<title>Zephaniah EPK</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/lightgallery.css">
 		<link rel="stylesheet" href="css/mainstyles.css">
 		<link rel="stylesheet" href="css/responsive-styles.css">
 		<link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script type="text/javascript" src="js/toggleLyrics.js"></script>
 	</head>
 	
 	<body>
-		<header>
-			<img src="http://www.zephaniahband.com/images/Zephaniah_logo.png" alt="Zephaniah Logo">
-	
-			<video autobuffer poster="http://www.zephaniahband.com/images/design/promo_pic_new.jpg" controls>
-				<source src="assets/video/ReforgedLive.mp4" type="video/mp4"> Your browser does not support the video tag.
+		<div id="bg_video">
+			<video autobuffer autoplay muted loop poster="http://www.zephaniahband.com/images/bg/Still001.jpg">
+				<source src="http://www.zephaniahband.com/video/Zeph-HeaderVid.mp4" type="video/mp4"> Your browser does not support the video tag.
 			</video>
-		</header>
-		
-		<section class="text">
-			<p>
-				Since 2005, Zephaniah has been involved in a growing revival of power and thrash metal in the American Midwest. Initially recognized for an energetic stage show and technically challenging music, the release of their first full album, <i>Stories from the Book of Metal (2008)</i>,
-				helped gain the group recognition in the global underground metal scene, independently selling approximately 850 copies by October 2010. </p>
-			<br>
-			<p>Zephaniah's new release - <i><b>REFORGED</b> (2015)</i> - features eight new songs showcasing the members' talents. Listeners can expect memorable melodies and must-hear musicality, tightly produced and delivered with a modern approach to the
-				traditional power/thrash format. As supplemental material, the band has also rerecorded two songs from the <i>Stories from the Book of Metal</i> album, which may be released as promotional tracks or album bonus tracks.</p>
-			<br>
-			<p>On and off stage, Zephaniah has worked hard to network and become a recognizable name in the tight-knit metal community. With tour dates from Kansas City to New York City and performances alongside notable bands such as Aska, Raven, and Michael
-				Angelo Batio, Zephaniah is aiming for wider distribution and more touring opportunities with the upcoming release of <i><b>REFORGED</b></i>.
-			</p>
-		</section>
-		
-		@html.block("body")
-		
-		<div class="line"></div>
-		
-		<section class="social-icons">
-			<ul>
-				<li id="facebooks">
-					<a href="http://www.facebook.com/zephaniahmetal" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/facebook.svg" alt="Link to band facebook"></a>
-				</li>
-				<li id="twitter">
-					<a href="https://twitter.com/zephaniahband" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/twitter.svg" alt="Link to band twitter"></a>
-				</li>
-				<li id="youtube">
-					<a href="https://www.youtube.com/playlist?list=PLim6anJGHTn27LwSBr-AbbiqKK7qWx87D&#10;" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/youtube.svg" alt="link to band youtube"></a>
-				</li>
-				<li id="instagram">
-					<a href="https://instagram.com/zephaniah_metal" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/instagram.svg" alt="Link to band instagram"></a>
-				</li>
-			</ul>
-		</section>
-		
-		<footer>
-			<ul>
-				<li class="name"><a href="#top">2016 Zephaniah</a></li>
-			</ul>
-		</footer>
+		</div>
+
+		<div id="content">
+			<header>
+				<img id="logoImg" src="http://www.zephaniahband.com/images/Zephaniah_logo.png" />
+			</header>
+			<section class="video-lightbox">
+			  <!-- Hidden full res video -->
+			  <div style="display:none;" id="video1">
+				  <video class="lg-video-object lg-html5" controls preload="none">
+					  <source src="http://www.zephaniahband.com/video/ReforgedLive.mp4" type="video/mp4"> Your browser does not support HTML5 video.
+				  </video>
+			  </div>
+			  <!-- Link to open light box -->
+			  <ul id="html5-videos">
+				  <li  data-poster="" data-html="#video1">
+					  <a href=""><img src="http://www.zephaniahband.com/images/design/Icon-play.png" /></a>
+				  </li>
+			  </ul>
+			</section>
+			
+			<section class="text">
+				<p>
+					Since 2005, Zephaniah has been involved in a growing revival of power and thrash metal in the American Midwest. Initially recognized for an energetic stage show and technically challenging music, the release of their first full album, <i>Stories from the Book of Metal (2008)</i>,
+					helped gain the group recognition in the global underground metal scene, independently selling approximately 850 copies by October 2010. </p>
+				<br>
+				<p>Zephaniah's new release - <i><b>REFORGED</b> (2015)</i> - features eight new songs showcasing the members' talents. Listeners can expect memorable melodies and must-hear musicality, tightly produced and delivered with a modern approach to the
+					traditional power/thrash format. As supplemental material, the band has also rerecorded two songs from the <i>Stories from the Book of Metal</i> album, which may be released as promotional tracks or album bonus tracks.</p>
+				<br>
+				<p>On and off stage, Zephaniah has worked hard to network and become a recognizable name in the tight-knit metal community. With tour dates from Kansas City to New York City and performances alongside notable bands such as Aska, Raven, and Michael
+					Angelo Batio, Zephaniah is aiming for wider distribution and more touring opportunities with the upcoming release of <i><b>REFORGED</b></i>.
+				</p>
+			</section>
+			
+			@html.block("body")
+			
+			<div class="line"></div>
+			
+			<section class="social-icons">
+				<ul>
+					<li id="facebooks">
+						<a href="http://www.facebook.com/zephaniahmetal" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/facebook.svg" alt="Link to band facebook"></a>
+					</li>
+					<li id="twitter">
+						<a href="https://twitter.com/zephaniahband" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/twitter.svg" alt="Link to band twitter"></a>
+					</li>
+					<li id="youtube">
+						<a href="https://www.youtube.com/playlist?list=PLim6anJGHTn27LwSBr-AbbiqKK7qWx87D&#10;" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/youtube.svg" alt="link to band youtube"></a>
+					</li>
+					<li id="instagram">
+						<a href="https://instagram.com/zephaniah_metal" target="_blank"><img src="http://www.zephaniahband.com/images/social-icons/instagram.svg" alt="Link to band instagram"></a>
+					</li>
+				</ul>
+			</section>
+			
+			<footer>
+				<ul>
+					<li class="name"><a href="#top">2016 Zephaniah</a></li>
+				</ul>
+			</footer>
+		</div>
 	</body>
 </html>

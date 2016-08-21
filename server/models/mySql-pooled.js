@@ -62,7 +62,7 @@ module.exports = function(config) {
 		
 			else if ( /ER_BAD_DB_ERROR/.test(err.code) ) {		
 				console.error('[mySql] The database in your config does not exist');
-				console.log('[mySql] Please re-enter the information and re-run your application.')
+				console.log('[mySql] Please re-enter the information and re-run your application.');
 				process.exit(1);
 			}
 			
@@ -138,6 +138,23 @@ module.exports = function(config) {
 					'FROM TourDates ' +
 					'ORDER BY ShowDate DESC';
 					
+		mySql.query(query, null, function(err, result) {
+			if (err) {
+				throw new Error(err);
+			} else {
+				next(null, result);
+			}
+		});
+	};
+	
+	mySql.getAlbumData = function(albumName, next) {
+		var query = "SELECT t.TrackNum, t.Name, t.Length, t.Lyrics " +
+					"FROM AlbumTracks t " +
+					"LEFT JOIN Albums a " +
+					"ON t.Albumid = a.Id " +
+					"WHERE a.Name = " + Connection.escape(albumName);
+					
+		console.log("getAlbumData");			
 		mySql.query(query, null, function(err, result) {
 			if (err) {
 				throw new Error(err);

@@ -1,8 +1,7 @@
-*
-{
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+* {
+  box-sizing : border-box;
+  margin     : 0;
+  padding    : 0;
 }
 
 /*
@@ -11,58 +10,86 @@
   *****************
 */
 
-body
-{
-	max-width: 500px;
-	margin: 0 auto;
-	padding: 0;
-	color: #333;
-	background: #eee;
-	text-align: center;
-	font-family: 'Oswald',
+body {
+  display: block;
+  max-width   : 500px;
+  margin-left : auto;
+  margin-right: auto;
+  padding     : 0;
+  /*color       : #333;*/
+  color       : #ccc;
+  background  : #eee;
+  text-align  : center;
+  font-family : 'Oswald',
                 sans-serif;
-	font-weight: 300;
-	font-size: 1.2em;
+  font-weight : 300;
+  font-size: 1.2em;
 }
 
-.line
-{
-	width: 70%;
-	height: 1px;
-	margin: 25px auto;
-	border-bottom: 1px solid #888;
-	background: #eee;
+#content {
+  background-color: rgba(0,0,0,.8);
+  padding: 10px;
+
 }
 
-h1
-{
-	margin: 50px 0 40px;
-	text-transform: uppercase;
-	font-size: 2em;
+.line {
+  width         : 70%;
+  height        : 1px;
+  margin        : 25px auto;
+  border-bottom : 1px solid #888;
+  background    : #eee;
+  clear         : both;
+}
+
+h1 {
+  margin         : 50px 0 40px;
+  text-transform : uppercase;
+  font-size: 2em;
 }
 
 h2,
 h3,
-h4
-{
-	margin: 25px;
+h4 {
+  margin : 25px;
 }
 
-li
-{
-	list-style: none;
+li {
+  list-style : none;
 }
 
-a
-{
-	text-decoration: none;
-	color: #333;
-	font-weight: 400;
+li a {
+  display: inline-block;
 }
 
-p
-{
-	font-weight: 300;
+a {
+  text-decoration: none;
+  /*color       : #333;*/
+  color: #ccc;
+  font-weight: 400;
+  /* transition to animate size and color change on hover */
+  -webkit-transition: color .2s ease-in;
+  -webkit-transition: .2s ease-in;
+  -moz-transition: color .2s ease-in;
+  -moz-transition: .2s ease-in;
+  -ms-transition: color .2s ease-in;
+  -ms-transition: .2s ease-in;
+  -o-transition: color .2s ease-in;
+  -o-transition: .2s ease-in;
+  transition: color .2s ease-in;
+  transition: .2s ease-in;
+}
+
+a:hover {
+  -webkit-transform: scale(1.05, .2s);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+  transform: scale(1.05);
+  color: #c60;
+}
+
+p {
+  font-weight:300;
 }
 
 /*
@@ -71,17 +98,56 @@ p
   *****************
 */
 
-header
-{
-	width: 100%;
-	margin: 10px auto 50px;
+header {
+  width: 100%;
+  margin : 0px auto 50px;
+}
+
+header #logoImg {
+  -webkit-filter: invert(100%);
+  -ms-filter: invert(100%);
+  -o-filter: invert(100%);
+  filter: invert(100%);
+}
+
+header #playBtn {
+  width: 100px;
+  height: 100px;
 }
 
 header img,
-header video
-{
-	max-width: 100%;
+header video {
+  max-width : 100%;
 }
+
+@media only screen and (min-width: 2000px) {
+  .discography {
+    font-size: 1.5em;
+  }
+
+  .shows { 
+    font-size: 1.5em;
+  }
+}
+/*
+ ******************
+ Background Video
+ ******************
+*/
+#bg_video video {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100vw;
+  min-height: 100vh;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
 
 /*
   ****************
@@ -89,48 +155,42 @@ header video
   *****************
 */
 
-.members
-{
-	margin: 40px 0;
-	max-width: 100%;
+.members {
+  margin: 40px 0;
+  max-width: 100%;
 }
 
-.members .member
-{
-	height: 400px;
-	overflow: hidden;
-	position: relative;
+.members .member {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
 }
 
-.members .label
-{
-	margin: 0;
-	width: 100%;
-	position: absolute;
-	bottom: 0;
+.members .label {
+  margin: 0;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .members .label h3,
-.members .label h4
-{
-	display: inline-block;
-	margin: 0 0 0 4px;
-	color: #eee;
+.members .label h4 {
+  display: inline-block;
+  margin: 0 0 0 4px;
+  color: #eee;
 }
 
-.members .label h3
-{
-	font-size: 3em;
+.members .label h3 {
+  font-size: 3em;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.members .label h4 {
+  font-size: 1.5em;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.members .label h4
-{
-	font-size: 1.5em;
-}
-
-.members img
-{
-	max-width: 100%;
+.members img {
+  max-width : 100%;
 }
 
 /*
@@ -138,11 +198,39 @@ header video
   Discography
   *****************
 */
-
-.discography img
-{
-	max-width: 400px;
+.discography {
+  margin: 40px 0;
 }
+
+.discography img {
+  min-width: 50%
+  min-height: 50%;
+  width: 90%!important;
+  border: 1px solid black;
+}
+
+.discography table {
+  margin: 2em auto;
+  max-width: 90%;
+  font-size: .7em;
+}
+
+
+
+.discography td {
+  padding: .2em;
+}
+
+.discography .lyrics {
+  min-width: 100%;
+}
+
+.discography div {
+  min-width: 50%;
+  display: inline;
+}
+
+
 
 /*
   ****************
@@ -150,9 +238,21 @@ header video
   *****************
 */
 
-.shows
-{
-	min-height: 300px;
+.shows {
+  min-height : 300px;
+  max-height: 700px;
+  overflow-y: scroll;
+}
+
+.shows table {
+  margin: auto;
+  border-collapse: collapse;
+  font-size: .7em;
+}
+
+.shows table td {
+  border-top: 1px solid rgba(20,20,20,.5);
+  padding: 0 .2em;
 }
 
 /*
@@ -161,9 +261,8 @@ header video
   *****************
 */
 
-.contact li
-{
-	margin: 30px 0;
+.contact li {
+  margin : 30px 0;
 }
 
 /*
@@ -171,59 +270,50 @@ header video
   Reviews
   *****************
 */
-.reviews a
-{
-	margin: 30px 0;
-	display: block;
+.reviews a {
+  margin: 30px 0;
+  display: block;
 }
 /*
   ****************
   Social Icons
   *****************
 */
-.social-icons
-{
+.social-icons {
+
 }
 
-.social-icons li
-{
-	display: inline-block;
+.social-icons li {
+  display: inline-block;
 }
 
-.social-icons img
-{
-	margin: 10px 20px;
-	width: 30px;
-	height: 30px;
-	-webkit-filter: grayscale(100%);
+.social-icons img  {
+  margin: 10px 20px;
+  width: 30px;
+  height: 30px;
+  -webkit-filter: grayscale(100%);
 }
 
-.social-icons img:hover
-{
-	-webkit-filter: grayscale(0);
+.social-icons img:hover {
+  -webkit-filter: grayscale(0);
 }
 
-img
-{
-}
+
 /*
   ****************
   Footer
   *****************
 */
 
-footer
-{
-	margin: 30px;
-	font-size: .8em;
+footer {
+  padding: 30px;
+  font-size: .8em;
 }
 
-footer li
-{
-	margin: 20px;
+footer li {
+  margin: 20px;
 }
 
-footer a
-{
-	font-weight: 300;
+footer a {
+  font-weight: 300;
 }
