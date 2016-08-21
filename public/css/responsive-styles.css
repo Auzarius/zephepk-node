@@ -64,3 +64,33 @@ Responsive greater than 768px
   }
  
 }
+
+/**********************
+Responsive greater than 1500px
+**********************/
+
+@media only screen and (min-width: 1500px) {
+  .discography {
+    font-size: 1.3em;
+  }
+
+  .shows { 
+    font-size: 1.3em;
+  }
+}
+
+/**********************
+Responsive greater than 2000px
+**********************/
+
+@media only screen and (min-width: 2000px) {
+  .discography {
+    font-size: 1.5em;
+  }
+
+  .shows { 
+    font-size: 1.5em;
+  }
+}
+
+

@@ -120,7 +120,7 @@ td, th {
 	@media only print {
 		padding: 2px !important;
 	}
-}	
+}
 
 .table-striped tbody tr:nth-child(even) td, .table-striped tbody tr:nth-child(even) th {
 	background-color: $ts_table-stripe-light;
