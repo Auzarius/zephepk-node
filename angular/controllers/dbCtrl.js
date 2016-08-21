@@ -67,6 +67,14 @@ angular.module('dbCtrl', ['dbService'])
 		else
 		 	return true;
 	};
+	
+	$scope.parseDate = function(date) {
+		if ($scope.isDate(date)) {
+			return Date.parse(date);
+		} else {
+			return date;
+		}
+	};
 
 	$scope.getType = function(myVar) {
 		return typeof myVar;

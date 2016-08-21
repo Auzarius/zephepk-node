@@ -403,6 +403,12 @@ div[ng-view].ng-enter {
 	background-color: #333;
 }
 
+textarea.editable-input {
+	min-width: 300px;
+	min-height: 300px;
+	height: auto;
+}
+
 /*!
 Animate.css - http://daneden.me/animate
 Licensed under the MIT license
